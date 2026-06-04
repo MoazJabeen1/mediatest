@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Final Showcase | Creative Media</title>
+    <style>
+        /* CSS: Styling and Mobile Responsiveness */
+        :root {
+            --primary: #00ffcc;
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            background: rgba(0, 255, 204, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        p.bio {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Filter Buttons */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid #444;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Project Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .project-media {
+            width: 100%;
+            height: 200px;
+            background-color: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Video Play Button Overlay */
+        .play-btn {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            border: 2px solid var(--primary);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 1px solid #333;
+            color: var(--text-muted);
+        }
+
+        a.contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="welcome-badge">Thanks for scanning the poster! 📱</div>
+        <h1>My Final <span>Showcase</span></h1>
+        <p class="bio">Level 3 Creative Media Student. Specializing in visual storytelling, digital design, and audio production. Check out my best work below.</p>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProjects('all')">View All</button>
+            <button class="filter-btn" onclick="filterProjects('video')">Video Production</button>
+            <button class="filter-btn" onclick="filterProjects('design')">Graphic Design</button>
+            <button class="filter-btn" onclick="filterProjects('audio')">Audio/Radio</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="portfolio-grid" id="grid">
+            
+            <div class="project-card" data-category="video">
+                <div class="project-media">
+                    <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Short Film Scene">
+                    <div class="play-btn">▶</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Short Film</span>
+                    <h3>"Neon Shadows"</h3>
+                    <p>A 3-minute sci-fi thriller exploring lighting techniques and suspense pacing. Edited in Premiere Pro.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="design">
+                <div class="project-media">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Branding Mockup">
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Brand Identity</span>
+                    <h3>EcoCoffee Rebrand</h3>
+                    <p>Complete branding package including logo design, typography choices, and packaging mockups created in Illustrator.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="audio">
+                <div class="project-media">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Podcast Microphone">
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Podcast / Radio</span>
+                    <h3>The Creative Mindset</h3>
+                    <p>A 10-minute radio documentary interviewing local artists. Recorded via Zoom and mixed in Adobe Audition.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="video">
+                <div class="project-media">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Retro Tech">
+                    <div class="play-btn">▶</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Motion Graphics</span>
+                    <h3>Retro Tech Intro</h3>
+                    <p>A 15-second kinetic typography and 2D animation sequence designed in After Effects for a YouTube channel.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Like what you see? <a href="mailto:your.email@example.com" class="contact-link">Get in touch!</a></p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2026 Creative Media Showcase.</p>
+    </footer>
+
+    <script>
+        function filterProjects(category) {
+            // Update active button styling
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter the cards
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    // Small animation effect when showing
+                    card.style.animation = 'fadeIn 0.5s';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add CSS keyframes for the fade-in dynamically
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
