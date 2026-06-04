@@ -29,7 +29,7 @@
 
         /* --- Main Homepage View --- */
         #home-view {
-            display: block; /* Visible by default */
+            display: block;
             animation: fadeIn 0.5s ease;
         }
 
@@ -104,7 +104,6 @@
             margin: 0 auto;
         }
 
-        /* Make cards look clickable */
         .project-card {
             background: var(--bg-card);
             border-radius: 12px;
@@ -171,7 +170,7 @@
 
         /* --- Project Detail Page View --- */
         #project-view {
-            display: none; /* Hidden by default */
+            display: none;
             padding: 2rem;
             max-width: 900px;
             margin: 0 auto;
@@ -240,7 +239,6 @@
 </head>
 <body>
 
-    <!-- ================= HOMEPAGE VIEW ================= -->
     <div id="home-view">
         <header>
             <div class="welcome-badge">Thanks for scanning the poster! 📱</div>
@@ -258,7 +256,6 @@
         <main>
             <div class="portfolio-grid" id="grid">
                 
-                <!-- Notice the new onclick="openProject('project-1')" -->
                 <div class="project-card" data-category="video" onclick="openProject('project-1')">
                     <div class="project-media">
                         <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Short Film">
@@ -278,7 +275,7 @@
                     <div class="project-info">
                         <span class="project-tag">Brand Identity</span>
                         <h3>EcoCoffee Rebrand</h3>
-                        <p>Complete branding package including logo design and typography choices.</p>
+                        <p>Complete branding package including logo design and packaging mockups.</p>
                     </div>
                 </div>
 
@@ -289,7 +286,41 @@
                     <div class="project-info">
                         <span class="project-tag">Podcast / Radio</span>
                         <h3>The Creative Mindset</h3>
-                        <p>A 10-minute radio documentary interviewing local artists.</p>
+                        <p>A 10-minute radio documentary interviewing local artists about their process.</p>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="video" onclick="openProject('project-4')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Retro Tech">
+                        <div class="play-btn">▶</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Motion Graphics</span>
+                        <h3>Retro Tech Intro</h3>
+                        <p>A 15-second kinetic typography and 2D animation sequence designed in After Effects.</p>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="design" onclick="openProject('project-5')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Photography">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Photography</span>
+                        <h3>Urban Decay Essay</h3>
+                        <p>A photo-essay documenting the changing architecture of the industrial district.</p>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="design" onclick="openProject('project-6')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="UI Design">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">UI/UX Design</span>
+                        <h3>Fitness App Wireframes</h3>
+                        <p>Interactive prototypes and user interface design for a fictional health tracker.</p>
                     </div>
                 </div>
 
@@ -297,15 +328,12 @@
         </main>
     </div>
 
-    <!-- ================= PROJECT DETAIL PAGE VIEW ================= -->
-    <!-- This section is hidden until a user clicks a project card -->
     <div id="project-view">
         <button class="back-btn" onclick="goBack()">← Back to Showcase</button>
         
         <h2 id="detail-title">Project Title</h2>
         <span id="detail-role">My Role</span>
         
-        <!-- The image or video will be injected here by JavaScript -->
         <div id="detail-media"></div>
         
         <div id="detail-description">
@@ -318,10 +346,8 @@
         <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2026 Creative Media Showcase.</p>
     </footer>
 
-    <!-- --- JavaScript: Interactivity --- -->
     <script>
-        // 1. Database of all your projects
-        // You can edit the text here for your real projects!
+        // 1. Database of all 6 projects
         const projectsDatabase = {
             'project-1': {
                 title: '"Neon Shadows" - Short Film',
@@ -333,56 +359,63 @@
                 title: 'EcoCoffee Rebrand',
                 role: 'Role: Lead Graphic Designer',
                 image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                description: 'This brief required a complete overhaul of a fictional sustainable coffee brand. I designed a new vector logo in Adobe Illustrator, selected a natural earthy color palette, and created packaging mockups. <br><br> The typography was chosen to reflect a modern, clean, and environmentally friendly ethos.'
+                description: 'This brief required a complete overhaul of a fictional sustainable coffee brand. I designed a new vector logo in Adobe Illustrator, selected a natural earthy color palette, and created packaging mockups in Photoshop. <br><br> The typography was chosen to reflect a modern, clean, and environmentally friendly ethos.'
             },
             'project-3': {
                 title: 'The Creative Mindset Podcast',
                 role: 'Role: Sound Engineer & Host',
                 image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                description: 'A 10-minute radio feature exploring how young artists overcome creative blocks. I conducted interviews using Zoom, then brought the audio into Adobe Audition to remove background noise, compress the vocals, and mix in an underlying royalty-free music track.'
+                description: 'A 10-minute radio feature exploring how young artists overcome creative blocks. I conducted interviews using Zoom, then brought the audio into Adobe Audition. I focused heavily on removing background noise, compressing the vocals for broadcast standards, and mixing in an underlying royalty-free music track.'
+            },
+            'project-4': {
+                title: 'Retro Tech YouTube Intro',
+                role: 'Role: Motion Graphics Animator',
+                image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'A 15-second intro sequence designed for a gaming YouTube channel. I created the assets in Illustrator and imported them into After Effects. I utilized keyframe interpolation (easy ease) to create smooth, dynamic kinetic typography. <br><br> Adding CRT scanline overlays and glitch effects helped achieve the desired retro 80s aesthetic.'
+            },
+            'project-5': {
+                title: 'Urban Decay - Photo Essay',
+                role: 'Role: Photographer & Retoucher',
+                image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'This unit focused on visual storytelling through still images. I took my DSLR into the local industrial district to document buildings that are scheduled for demolition. <br><br> I shot entirely in RAW format and used Adobe Lightroom to color grade the images, enhancing the contrast and desaturating the colors to evoke a sense of isolation and history.'
+            },
+            'project-6': {
+                title: 'FitTrack App Wireframes',
+                role: 'Role: UI/UX Designer',
+                image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'Responding to a brief for a new health app, I designed the user interface for "FitTrack". I started with pen-and-paper sketches before moving into Figma to create high-fidelity, interactive prototypes. <br><br> I focused heavily on user experience (UX), ensuring the navigation was intuitive and that the contrast met accessibility standards for visually impaired users.'
             }
         };
 
-        // 2. Variables to grab the different "pages"
+        // 2. Variables
         const homeView = document.getElementById('home-view');
         const projectView = document.getElementById('project-view');
-
-        // Variables for the Project Page elements
         const detailTitle = document.getElementById('detail-title');
         const detailRole = document.getElementById('detail-role');
         const detailMedia = document.getElementById('detail-media');
         const detailDesc = document.getElementById('detail-description');
 
-        // 3. Function to Open a Project
+        // 3. Open Project Function
         function openProject(projectId) {
-            // Get the specific project data from our database above
             const project = projectsDatabase[projectId];
-
-            // Fill the project page with the data
             detailTitle.innerHTML = project.title;
             detailRole.innerHTML = project.role;
             detailMedia.innerHTML = `<img src="${project.image}" alt="${project.title}">`;
             detailDesc.innerHTML = project.description;
-
-            // Hide the homepage and show the project page
+            
             homeView.style.display = 'none';
             projectView.style.display = 'block';
-
-            // Scroll back to the top of the page smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 4. Function to Go Back to Homepage
+        // 4. Go Back Function
         function goBack() {
-            // Hide the project page and show the homepage
             projectView.style.display = 'none';
             homeView.style.display = 'block';
-            
-            // Scroll back to the top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 5. Filter Logic (Same as before)
+        // 5. Filter Logic
         function filterProjects(category) {
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -392,6 +425,7 @@
             cards.forEach(card => {
                 if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s';
                 } else {
                     card.style.display = 'none';
                 }
