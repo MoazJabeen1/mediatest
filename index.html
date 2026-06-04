@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Final Showcase | Creative Media</title>
     <style>
-        /* CSS: Styling and Mobile Responsiveness */
+        /* --- CSS: Styling and Mobile Responsiveness --- */
         :root {
             --primary: #00ffcc;
             --bg-dark: #121212;
@@ -25,6 +25,12 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
+        }
+
+        /* --- Main Homepage View --- */
+        #home-view {
+            display: block; /* Visible by default */
+            animation: fadeIn 0.5s ease;
         }
 
         header {
@@ -60,7 +66,7 @@
             font-size: 1.1rem;
         }
 
-        /* Filter Buttons */
+        /* Filters */
         .filters {
             display: flex;
             justify-content: center;
@@ -98,17 +104,20 @@
             margin: 0 auto;
         }
 
+        /* Make cards look clickable */
         .project-card {
             background: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease;
             border: 1px solid #333;
+            cursor: pointer; 
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 255, 204, 0.1);
         }
 
         .project-media {
@@ -128,7 +137,6 @@
             object-fit: cover;
         }
 
-        /* Video Play Button Overlay */
         .play-btn {
             position: absolute;
             width: 50px;
@@ -161,10 +169,65 @@
             font-size: 1.3rem;
         }
 
-        .project-info p {
+        /* --- Project Detail Page View --- */
+        #project-view {
+            display: none; /* Hidden by default */
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .back-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        #detail-media img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid #333;
+        }
+
+        #detail-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #detail-role {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        #detail-description {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -173,115 +236,167 @@
             border-top: 1px solid #333;
             color: var(--text-muted);
         }
-
-        a.contact-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="welcome-badge">Thanks for scanning the poster! 📱</div>
-        <h1>My Final <span>Showcase</span></h1>
-        <p class="bio">Level 3 Creative Media Student. Specializing in visual storytelling, digital design, and audio production. Check out my best work below.</p>
-        
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterProjects('all')">View All</button>
-            <button class="filter-btn" onclick="filterProjects('video')">Video Production</button>
-            <button class="filter-btn" onclick="filterProjects('design')">Graphic Design</button>
-            <button class="filter-btn" onclick="filterProjects('audio')">Audio/Radio</button>
-        </div>
-    </header>
-
-    <main>
-        <div class="portfolio-grid" id="grid">
+    <!-- ================= HOMEPAGE VIEW ================= -->
+    <div id="home-view">
+        <header>
+            <div class="welcome-badge">Thanks for scanning the poster! 📱</div>
+            <h1>My Final <span>Showcase</span></h1>
+            <p class="bio">Level 3 Creative Media Student. Tap on any project below to view the full details and media.</p>
             
-            <div class="project-card" data-category="video">
-                <div class="project-media">
-                    <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Short Film Scene">
-                    <div class="play-btn">▶</div>
-                </div>
-                <div class="project-info">
-                    <span class="project-tag">Short Film</span>
-                    <h3>"Neon Shadows"</h3>
-                    <p>A 3-minute sci-fi thriller exploring lighting techniques and suspense pacing. Edited in Premiere Pro.</p>
-                </div>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterProjects('all')">View All</button>
+                <button class="filter-btn" onclick="filterProjects('video')">Video Production</button>
+                <button class="filter-btn" onclick="filterProjects('design')">Graphic Design</button>
+                <button class="filter-btn" onclick="filterProjects('audio')">Audio/Radio</button>
             </div>
+        </header>
 
-            <div class="project-card" data-category="design">
-                <div class="project-media">
-                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Branding Mockup">
+        <main>
+            <div class="portfolio-grid" id="grid">
+                
+                <!-- Notice the new onclick="openProject('project-1')" -->
+                <div class="project-card" data-category="video" onclick="openProject('project-1')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Short Film">
+                        <div class="play-btn">▶</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Short Film</span>
+                        <h3>"Neon Shadows"</h3>
+                        <p>A 3-minute sci-fi thriller exploring lighting techniques and suspense pacing.</p>
+                    </div>
                 </div>
-                <div class="project-info">
-                    <span class="project-tag">Brand Identity</span>
-                    <h3>EcoCoffee Rebrand</h3>
-                    <p>Complete branding package including logo design, typography choices, and packaging mockups created in Illustrator.</p>
+
+                <div class="project-card" data-category="design" onclick="openProject('project-2')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Branding">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Brand Identity</span>
+                        <h3>EcoCoffee Rebrand</h3>
+                        <p>Complete branding package including logo design and typography choices.</p>
+                    </div>
                 </div>
+
+                <div class="project-card" data-category="audio" onclick="openProject('project-3')">
+                    <div class="project-media">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Audio">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Podcast / Radio</span>
+                        <h3>The Creative Mindset</h3>
+                        <p>A 10-minute radio documentary interviewing local artists.</p>
+                    </div>
+                </div>
+
             </div>
+        </main>
+    </div>
 
-            <div class="project-card" data-category="audio">
-                <div class="project-media">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Podcast Microphone">
-                </div>
-                <div class="project-info">
-                    <span class="project-tag">Podcast / Radio</span>
-                    <h3>The Creative Mindset</h3>
-                    <p>A 10-minute radio documentary interviewing local artists. Recorded via Zoom and mixed in Adobe Audition.</p>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="video">
-                <div class="project-media">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Retro Tech">
-                    <div class="play-btn">▶</div>
-                </div>
-                <div class="project-info">
-                    <span class="project-tag">Motion Graphics</span>
-                    <h3>Retro Tech Intro</h3>
-                    <p>A 15-second kinetic typography and 2D animation sequence designed in After Effects for a YouTube channel.</p>
-                </div>
-            </div>
-
+    <!-- ================= PROJECT DETAIL PAGE VIEW ================= -->
+    <!-- This section is hidden until a user clicks a project card -->
+    <div id="project-view">
+        <button class="back-btn" onclick="goBack()">← Back to Showcase</button>
+        
+        <h2 id="detail-title">Project Title</h2>
+        <span id="detail-role">My Role</span>
+        
+        <!-- The image or video will be injected here by JavaScript -->
+        <div id="detail-media"></div>
+        
+        <div id="detail-description">
+            Project description goes here...
         </div>
-    </main>
+    </div>
 
     <footer>
-        <p>Like what you see? <a href="mailto:your.email@example.com" class="contact-link">Get in touch!</a></p>
+        <p>Like what you see? <a href="mailto:your.email@example.com" style="color: var(--primary); text-decoration: none; font-weight: bold;">Get in touch!</a></p>
         <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2026 Creative Media Showcase.</p>
     </footer>
 
+    <!-- --- JavaScript: Interactivity --- -->
     <script>
+        // 1. Database of all your projects
+        // You can edit the text here for your real projects!
+        const projectsDatabase = {
+            'project-1': {
+                title: '"Neon Shadows" - Short Film',
+                role: 'Role: Director & Lead Editor',
+                image: 'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'For my final piece, I directed and edited this 3-minute sci-fi thriller. The main goal was to experiment with neon lighting setups inspired by Cyberpunk aesthetics. I used Adobe Premiere Pro for the cutting and After Effects for the glowing color grading. <br><br> <strong>Challenges:</strong> Balancing the exposure in low-light environments was difficult, but I overcame this by using practical LED tube lights on set.'
+            },
+            'project-2': {
+                title: 'EcoCoffee Rebrand',
+                role: 'Role: Lead Graphic Designer',
+                image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'This brief required a complete overhaul of a fictional sustainable coffee brand. I designed a new vector logo in Adobe Illustrator, selected a natural earthy color palette, and created packaging mockups. <br><br> The typography was chosen to reflect a modern, clean, and environmentally friendly ethos.'
+            },
+            'project-3': {
+                title: 'The Creative Mindset Podcast',
+                role: 'Role: Sound Engineer & Host',
+                image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                description: 'A 10-minute radio feature exploring how young artists overcome creative blocks. I conducted interviews using Zoom, then brought the audio into Adobe Audition to remove background noise, compress the vocals, and mix in an underlying royalty-free music track.'
+            }
+        };
+
+        // 2. Variables to grab the different "pages"
+        const homeView = document.getElementById('home-view');
+        const projectView = document.getElementById('project-view');
+
+        // Variables for the Project Page elements
+        const detailTitle = document.getElementById('detail-title');
+        const detailRole = document.getElementById('detail-role');
+        const detailMedia = document.getElementById('detail-media');
+        const detailDesc = document.getElementById('detail-description');
+
+        // 3. Function to Open a Project
+        function openProject(projectId) {
+            // Get the specific project data from our database above
+            const project = projectsDatabase[projectId];
+
+            // Fill the project page with the data
+            detailTitle.innerHTML = project.title;
+            detailRole.innerHTML = project.role;
+            detailMedia.innerHTML = `<img src="${project.image}" alt="${project.title}">`;
+            detailDesc.innerHTML = project.description;
+
+            // Hide the homepage and show the project page
+            homeView.style.display = 'none';
+            projectView.style.display = 'block';
+
+            // Scroll back to the top of the page smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 4. Function to Go Back to Homepage
+        function goBack() {
+            // Hide the project page and show the homepage
+            projectView.style.display = 'none';
+            homeView.style.display = 'block';
+            
+            // Scroll back to the top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 5. Filter Logic (Same as before)
         function filterProjects(category) {
-            // Update active button styling
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Filter the cards
             const cards = document.querySelectorAll('.project-card');
             cards.forEach(card => {
                 if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
-                    // Small animation effect when showing
-                    card.style.animation = 'fadeIn 0.5s';
                 } else {
                     card.style.display = 'none';
                 }
             });
         }
-
-        // Add CSS keyframes for the fade-in dynamically
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
